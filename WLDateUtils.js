@@ -27,6 +27,14 @@ export default class WLDateUtil extends React.Component{
             return 30;
         }
     }
+
+    static formatString(number){
+        if(number == undefined || number == null){
+            return '';
+        }
+        return number < 10 ? '0'+number : number+'';
+    }
+
     static getDate(){
         let date = new Date();
         return date;
@@ -64,11 +72,23 @@ export default class WLDateUtil extends React.Component{
 
     static currentDateString(){
         let year = this.year();
+        
         let month = this.month();
-        month = month < 10 ? ('0'+month) : month;
+        month = this.formatString(month);
+        
         let day = this.day();
-        day = day < 10 ? ('0'+day) : day;
-        return year+'-'+month+'-'+day;
+        day = this.formatString(day);
+
+        let hour = this.hour();
+        hour = this.formatString(hour);
+
+        let minute = this.minute();
+        minute = this.formatString(minute);
+
+        let second = this.second();
+        second = this.formatString(second);
+        
+        return year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
     }
 
     /**
@@ -84,20 +104,20 @@ export default class WLDateUtil extends React.Component{
                     let year = dateStr.slice(0,4);
                     let month = dateStr.slice(5,7);
                     let day = dateStr.slice(8,10);
-                    rets.push(year,month,day);
+                    rets.push(year,month,day,'','','');
                 }
             }else if('date_month' == type){
                 if(7 == dateStr.length){//2018-09
                     let year = dateStr.slice(0,4);
                     let month = dateStr.slice(5,7);
-                    rets.push(year,month);
+                    rets.push(year,month,'','','','');
                 }
             }else if('time' == type){
                 if(8 == dateStr.length){//19:29:20
                     let hour = dateStr.slice(0,2);
                     let minute = dateStr.slice(3,5);
                     let second = dateStr.slice(6,8);
-                    rets.push(hour,minute,second);
+                    rets.push('','','',hour,minute,second);
                 }
             }else if('date_time' == type){
                 if(19 == dateStr.length){//2018-09-09 10:20:30
@@ -124,7 +144,7 @@ export default class WLDateUtil extends React.Component{
     static getShowMonth(){
         let array = [];
         for(let i=1;i<=12;i++){
-            let month = i < 10 ? ('0'+i) : i+'';
+            let month = this.formatString(i);
             array.push(month);
         }
         return array;
@@ -133,15 +153,15 @@ export default class WLDateUtil extends React.Component{
         let array = [];
         let count = this.getDayCount(year,month);
         for(let i=1;i<=count;i++){
-            let day = i < 10 ? ('0'+i) : i+'';
+            let day = this.formatString(i);;
             array.push(day);
         }
         return array;
     }
-    static getShowHOur(){
+    static getShowHour(){
         let array = [];
         for (let i = 1; i < 24; i++){
-            let hour = i < 10 ? ('0'+i) :i+'';
+            let hour = this.formatString(i);;
             array.push(hour);
         }
         return array;
@@ -149,7 +169,7 @@ export default class WLDateUtil extends React.Component{
     static getShowMinute(){
         let array = [];
         for (let i = 1; i <= 60; i++){
-            let minute = i < 10 ? ('0'+i) :i+'';
+            let minute = this.formatString(i);;
             array.push(minute);
         }
         return array;
@@ -157,7 +177,7 @@ export default class WLDateUtil extends React.Component{
     static getShowSecond(){
         let array = [];
         for (let i = 1; i <= 60; i++){
-            let second = i < 10 ? ('0'+i) :i+'';
+            let second = this.formatString(i);;
             array.push(second);
         }
         return array;

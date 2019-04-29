@@ -1,9 +1,4 @@
 
-安装命令
-```
-yarn add WLDatePicker
-```
-
 本组件是一个日期时间选择器，具体参数下
 
 |属性|介绍|类型|必填|默认值|
@@ -14,3 +9,30 @@ yarn add WLDatePicker
 |visible|是否显示|bool|true|false|
 |hideCompleteFunc|隐藏完成回调函数|func|false||
 |sureFunc|点击确定返回选中日期时间函数|func|false||
+
+使用示例
+```
+constructor(){
+  super();
+
+  this.state = {
+      visible:false
+  };
+}
+
+render(){
+  return (
+    <View style = {styles.container}>
+      <DatePicker
+        visible = {this.state.visible}
+        hideCompleteFunc = {()=>{
+
+        }}
+        sureFunc = {(date)=>{
+           console.log('date = '+date);
+        }}
+      />
+    </View>
+  );
+}
+```

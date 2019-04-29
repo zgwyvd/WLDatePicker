@@ -8,6 +8,8 @@ import {View,
     } from 'react-native';
 import PropTypes from 'prop-types';
 
+//测试git命令
+
 //import {I18n} from '../../../Utils/LanguageUtil';
 //import * as CommonUtils from '../../../Utils/CommonUtils';
 //import * as DateConfig from '../../../Utils/DateConfig';
